@@ -1,0 +1,279 @@
+/* ============================================================
+   Catnalytics — Color & Type Tokens
+   Source: catnalytics_dev (Flutter app theme + Material 3) +
+   catnalytics landing page (web). Mint #1FDADB is the brand
+   accent; dark mode is the default presentation.
+   ============================================================ */
+
+/* ---------- Fonts ---------- */
+@font-face {
+  font-family: 'Pretendard';
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url('./fonts/Pretendard-Regular.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Pretendard';
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url('./fonts/Pretendard-Bold.otf') format('opentype');
+}
+/* Pretendard 500/600 are not in the source repo — substitute Regular metrics. */
+@font-face {
+  font-family: 'Pretendard';
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  src: url('./fonts/Pretendard-Regular.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Pretendard';
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  src: url('./fonts/Pretendard-Bold.otf') format('opentype');
+}
+
+/* Display sans + monospace used on the marketing site */
+
+/* ============================================================
+   COLORS
+   ============================================================ */
+:root {
+  /* Brand */
+  --mint:           #1FDADB;
+  --mint-strong:    #13A8A9;
+  --mint-soft:      #7FE8E9;
+  --mint-glow:      rgba(31, 218, 219, 0.10);
+  --mint-border:    rgba(31, 218, 219, 0.25);
+
+  /* Status (shared light + dark) */
+  --success:        #35B36F;
+  --warning:        #F4B740;
+  --danger:         #E05A5A;
+  --danger-soft:    #F09595;
+  --alert-tint:     rgba(226, 75, 74, 0.08);
+
+  /* Neutrals shared across modes */
+  --pure-black:     #000000;
+  --pure-white:     #FFFFFF;
+
+  /* Dark mode (default) */
+  --bg:                 #121212;
+  --bg-deep:            #050505; /* web hero */
+  --bg-2:               #1E1E1E; /* card */
+  --bg-3:               #2A2A2A; /* surfaceContainerHighest */
+  --border:             #2B2F35;
+  --border-hairline:    rgba(255, 255, 255, 0.07);
+  --primary:            #1FDADB; /* dark-mode primary == mint */
+  --on-primary:         #121212;
+  --fg:                 #EDEFF2;
+  --fg-muted:           rgba(237, 239, 242, 0.70);
+  --fg-dim:             rgba(237, 239, 242, 0.50);
+  --fg-faint:           rgba(237, 239, 242, 0.30);
+}
+
+/* Light mode override (Flutter light theme) */
+[data-theme='light'] {
+  --bg:                 #F1F3F6;
+  --bg-deep:            #FFFFFF;
+  --bg-2:               #FFFFFF;
+  --bg-3:               #F0F2F5;
+  --border:             #E1E5EA;
+  --border-hairline:    rgba(0, 0, 0, 0.06);
+  --primary:            #4B5563; /* light-mode primary is graphite */
+  --on-primary:         #FFFFFF;
+  --fg:                 #1F2933;
+  --fg-muted:           rgba(31, 41, 51, 0.70);
+  --fg-dim:             rgba(31, 41, 51, 0.55);
+  --fg-faint:           rgba(31, 41, 51, 0.30);
+}
+
+/* Semantic role aliases (Material 3 mapping) */
+:root,
+[data-theme='light'] {
+  --surface:                  var(--bg-2);
+  --surface-elevated:         var(--bg-3);
+  --on-surface:               var(--fg);
+  --outline:                  var(--border);
+  --secondary:                var(--mint); /* mint accent in both modes */
+  --on-secondary:             #121212;
+  --tertiary:                 var(--success);
+}
+
+/* ============================================================
+   TYPE — base
+   ============================================================ */
+:root {
+  --font-sans-kr:   'Pretendard', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-sans-en:   'Plus Jakarta Sans', 'Pretendard', system-ui, sans-serif;
+  --font-mono:      'DM Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* The body face. Pretendard is bilingual (KR + EN) so it covers both. */
+  --font-body:      var(--font-sans-kr);
+  --font-display:   var(--font-sans-en); /* English headlines / wordmark */
+  --font-code:      var(--font-mono);
+
+  /* Weights */
+  --w-regular:  400; /* @kind font */
+  --w-medium:   500; /* @kind font */
+  --w-semibold: 600; /* @kind font */
+  --w-bold:     700; /* @kind font */
+  --w-heavy:    800; /* @kind font */
+
+  /* Type scale (px) — matches Flutter widget usage */
+  --fs-display:  88px; /* hero on web; clamps down */
+  --fs-h1:       44px;
+  --fs-h2:       26px;
+  --fs-h3:       20px;
+  --fs-title:    18px; /* app bar */
+  --fs-body:     15px;
+  --fs-body-sm:  14px;
+  --fs-meta:     13px;
+  --fs-label:    12px;
+  --fs-tag:      11px; /* uppercase mono tags */
+  --fs-micro:    10px;
+
+  --lh-tight:    1.10; /* @kind font */
+  --lh-snug:     1.30; /* @kind font */
+  --lh-base:     1.55; /* @kind font */
+  --lh-comfy:    1.70; /* @kind font */
+  --lh-loose:    1.90; /* @kind font */
+
+  --ls-display:  -0.04em;
+  --ls-heading:  -0.02em;
+  --ls-tag:       0.12em; /* uppercase mono */
+  --ls-button:    0.02em;
+}
+
+/* ============================================================
+   SPACING / SHAPE
+   ============================================================ */
+:root {
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-7:  32px;
+  --space-8:  40px;
+  --space-9:  48px;
+  --space-10: 64px;
+
+  /* Corner radii — drawn from Flutter widgets:
+     card 16, item 10, sheet top 20, chip 999, accent bar 6 */
+  --radius-xs:  4px;
+  --radius-sm:  8px;
+  --radius-md:  10px;
+  --radius-lg:  12px;
+  --radius-xl:  16px;
+  --radius-2xl: 20px;
+  --radius-pill: 999px;
+
+  --hairline: 0.5px;
+
+  /* Shadows — the system favors borders over elevation.
+     Use these sparingly; cards default to elevation 0. */
+  --shadow-none:  none;
+  --shadow-card:  0 1px 0 var(--border-hairline);
+  --shadow-pop:   0 8px 24px rgba(0, 0, 0, 0.32);
+  --glow-mint:    0 0 24px rgba(31, 218, 219, 0.35);
+}
+
+/* ============================================================
+   TYPE — semantic
+   ============================================================ */
+html, body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-comfy);
+  color: var(--fg);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, .h1 {
+  font-family: var(--font-display);
+  font-weight: var(--w-bold);
+  font-size: var(--fs-h1);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-heading);
+  color: var(--fg);
+  margin: 0;
+}
+h2, .h2 {
+  font-family: var(--font-display);
+  font-weight: var(--w-bold);
+  font-size: var(--fs-h2);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--ls-heading);
+  color: var(--fg);
+  margin: 0;
+}
+h3, .h3 {
+  font-family: var(--font-body);
+  font-weight: var(--w-bold);
+  font-size: var(--fs-h3);
+  line-height: var(--lh-snug);
+  color: var(--fg);
+  margin: 0;
+}
+.title {
+  font-family: var(--font-body);
+  font-weight: var(--w-semibold);
+  font-size: var(--fs-title);
+  color: var(--fg);
+}
+p, .p {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-comfy);
+  color: var(--fg-muted);
+  word-break: keep-all; /* Korean line breaking */
+  margin: 0;
+}
+.lead {
+  font-size: var(--fs-body);
+  color: var(--fg-muted);
+  line-height: var(--lh-loose);
+}
+.meta, small {
+  font-size: var(--fs-meta);
+  color: var(--fg-dim);
+  line-height: var(--lh-base);
+}
+.label {
+  font-size: var(--fs-label);
+  color: var(--fg-muted);
+  font-weight: var(--w-medium);
+}
+.tag, .eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-tag);
+  letter-spacing: var(--ls-tag);
+  text-transform: uppercase;
+  color: var(--mint);
+}
+code, kbd, .mono {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  color: var(--mint-soft);
+}
+.wordmark {
+  font-family: var(--font-display);
+  font-weight: var(--w-heavy);
+  font-size: 26px;
+  letter-spacing: 0.04em;
+  color: var(--fg);
+}
+
+/* Focus ring */
+:focus-visible {
+  outline: 2px solid var(--mint);
+  outline-offset: 2px;
+  border-radius: var(--radius-xs);
+}
