@@ -118,11 +118,11 @@
 .dev__card .ms{font-size:28px;color:var(--mint)}
 .dev__card--plain .ms{color:var(--fg-muted)}
 @media (max-width:760px){.dev__grid{grid-template-columns:1fr}}
-.devp__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:40px}
+.devp__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:24px}
 .devp{border:.5px solid var(--line);border-radius:20px;background:var(--card);overflow:hidden;display:flex;flex-direction:column}
-.devp__img{aspect-ratio:4/3;background:var(--card-2);overflow:hidden}
+.devp__img{height:clamp(120px,20svh,200px);background:var(--card-2);overflow:hidden}
 .devp__img img{width:100%;height:100%;object-fit:cover}
-.devp__b{padding:22px 22px 24px;display:flex;flex-direction:column;gap:8px}
+.devp__b{padding:16px;display:flex;flex-direction:column;gap:6px}
 .devp__tag{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;color:var(--mint)}
 .devp__m{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
 .devp__m>span{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--fg-muted);background:var(--card-2);border:.5px solid var(--line);border-radius:999px;padding:5px 11px}
@@ -133,7 +133,6 @@
 .cta{min-height:100vh;min-height:100svh;padding:clamp(40px,6vw,64px) 0;border-top:.5px solid var(--line);text-align:center;position:relative;overflow:hidden;display:flex;align-items:center}
 .cta__in{display:flex;flex-direction:column;align-items:center;gap:22px;position:relative}
 .store--off{opacity:.38;cursor:not-allowed;pointer-events:none;filter:grayscale(1)}
-.soon{align-self:center;flex:0 0 auto;white-space:nowrap;font-family:var(--font-mono);font-size:11.5px;letter-spacing:.06em;color:var(--fg-dim);padding:4px 10px;border:.5px solid var(--line-2);border-radius:999px}
 .wl{width:100%;max-width:480px;margin-top:12px;padding-top:32px;border-top:.5px solid var(--line);display:flex;flex-direction:column;gap:12px;align-items:stretch}
 .wl__t{font-weight:700;font-size:17px;color:var(--fg)}
 .wl__form{display:flex;gap:8px;padding:6px 6px 6px 18px;background:var(--card);border:1px solid var(--line-2);border-radius:999px;transition:border-color .2s,box-shadow .2s}
@@ -147,31 +146,82 @@
 .wl.is-done .wl__form{display:none}.wl.is-done .wl__ok{display:flex}
 .wl__hint{font-size:12.5px;color:var(--fg-dim)}
 .cta::before{content:"";position:absolute;left:50%;bottom:-60%;transform:translateX(-50%);width:900px;height:600px;background:radial-gradient(ellipse,rgba(31,218,219,.14),transparent 65%)}
+
+/* Full-screen sections with native scroll snapping. */
+:root{--nav-h:64px}
+html{scroll-snap-type:y mandatory;scroll-padding-top:var(--nav-h)}
+body{overflow-x:clip}
+.heroA,.feat,.dev,.cta{min-height:calc(100svh - var(--nav-h));scroll-snap-align:start;scroll-snap-stop:always;scroll-margin-top:0;display:flex;align-items:center}
+.h-xl{font-size:clamp(38px,6.2vw,68px)}
+.h-lg{font-size:clamp(32px,4.5vw,50px)}
+.devp .h-md{font-size:19px}
+.devp .body{font-size:13.5px;line-height:1.5}
+.heroA>.wrap,.feat>.wrap,.dev>.wrap,.cta>.wrap{width:100%}
+.heroA,.feat,.dev{padding:24px 0}
+.heroA__copy{padding-bottom:0}
+.heroA__copy .lead{margin-bottom:12px}
+.heroA__copy>.chip,.heroA__copy>h1,.heroA__copy>.lead{transform:translateY(-48px)}
+.feat .phone{width:auto;height:min(68svh,600px);aspect-ratio:402/874}
+@media(min-width:861px){
+  .feat__in,.feat:nth-child(even) .feat__in{max-width:1000px;grid-template-columns:repeat(2,minmax(0,1fr));gap:56px}
+  .feat__phone{justify-self:center}
+  .feat:nth-child(even) .feat__copy{margin-left:20px}
+  .feat:nth-child(odd) .feat__copy{margin-left:20px}
+  .feat:nth-child(odd) .feat__phone{transform:translateX(-20px)}
+}
+.cta{min-height:calc(100svh - var(--nav-h) - 48px)}
+@media(max-width:860px){
+  html{scroll-snap-type:none}
+  .heroA,.feat,.dev{min-height:0;display:block}
+  .heroA{padding:48px 0 0}
+  .heroA__in,.feat__in,.feat:nth-child(even) .feat__in{gap:28px}
+  .heroA__copy,.feat__copy{gap:16px}
+  .heroA__copy>.chip,.heroA__copy>h1,.heroA__copy>.lead{transform:none}
+  .heroA__copy .lead{margin-bottom:0}
+  .feat,.dev{padding:64px 0}
+  .feat .phone{height:min(140vw,600px)}
+  .feat__list{gap:8px;margin-top:4px}
+  .devp__grid{margin-top:28px;gap:12px}
+  .devp{flex-direction:row}
+  .devp__img{width:100px;height:auto;flex:0 0 100px}
+  .devp__b{padding:12px;gap:6px}
+  .devp .h-md{font-size:17px}
+  .devp .body{font-size:13px;line-height:1.5}
+  .devp__m{display:none}
+}
+@media(max-width:720px){
+  :root{--nav-h:78px}
+  .heroA__phone{height:min(110vw,430px)!important}
+  .heroA__copy .lead{font-size:16px;line-height:1.6}
+  .feat .body{font-size:15px;line-height:1.6}
+  .cta__in{gap:14px}
+}
+@media(prefers-reduced-motion:reduce) and (min-width:861px){html{scroll-snap-type:y proximity}}
 </style>
 </head>
 <body><a class="skip-link" href="#features">본문으로 건너뛰기</a><nav class="nav"><div class="wrap nav__in"><a class="brand" href="#top" aria-label="Catnalytics"><img src="logo_white.svg" alt=""><span><b>cat</b><i>nalytics</i></span></a><div class="nav__links"><a href="#features">앱 소개</a><a href="#devices">IoT 기기 소개</a></div><a class="btn btn--mint btn--sm" href="#notify">출시 알림 받기</a></div></nav>
 <header class="heroA" id="top"><div class="heroA__glow"></div><div class="wrap heroA__in">
 <div class="heroA__copy"><span class="chip"><span class="ms" aria-hidden="true">pets</span>고양이 건강관리 앱</span>
-<h1 class="h-xl">고양이의 하루를,<br>한 앱에서 <span class="mint">챙겨요</span></h1>
+<h1 class="h-xl">고양이의 하루를<br>한 앱에서 <span class="mint">챙겨요</span></h1>
 <p class="lead" style="max-width:520px">약·영양제 루틴부터 병원 일정, 매일의 기록과 변화까지.<br>흩어진 고양이 돌봄을 한곳에 모았어요.</p>
-<div class="hero-actions"><a class="btn btn--mint" href="#features">앱 살펴보기 <span aria-hidden="true">↓</span></a></div><div id="download"><div class="stores"><span class="store store--off" aria-disabled="true" title="출시 예정"><span class="ms" aria-hidden="true">phone_iphone</span><span><small>Download on the</small><strong>App Store</strong></span></span><span class="store store--ghost store--off" aria-disabled="true" title="출시 예정"><span class="ms" aria-hidden="true">android</span><span><small>GET IT ON</small><strong>Google Play</strong></span></span><span class="soon">출시 예정</span></div></div>
+<div id="download"><div class="stores"><span class="store store--off" aria-disabled="true" title="출시 예정"><span class="ms" aria-hidden="true">phone_iphone</span><span><small>Download on the</small><strong>App Store</strong></span></span><span class="store store--ghost store--off" aria-disabled="true" title="출시 예정"><span class="ms" aria-hidden="true">android</span><span><small>GET IT ON</small><strong>Google Play</strong></span></span></div></div>
 <p style="font-size:13px;color:var(--fg-dim)">2027년 앱 · IoT기기 출시 예정</p></div>
 <div class="heroA__phone" aria-label="개발 중인 앱 화면 디자인, 예시 데이터"><div class="fanA"><div class="phone" style="--s:.46"><img src="assets/screens/record.png" width="804" height="1748" alt="고양이별 날짜별 기록 디자인" loading="lazy" decoding="async"></div><div class="phone" style="--s:.56"><img src="assets/screens/home.png" width="804" height="1748" alt="오늘의 돌봄과 루틴을 보여주는 홈 디자인" loading="lazy" decoding="async"></div><div class="phone" style="--s:.46"><img src="assets/screens/report.png" width="804" height="1748" alt="수치 변화와 돌봄을 보여주는 리포트 디자인" loading="lazy" decoding="async"></div></div></div>
 </div></header>
 <main id="features"><span id="problem" class="anchor-alias"></span>
-<section class="feat"><div class="wrap feat__in reveal"><div class="feat__copy"><span class="eyebrow">오늘 할 일</span><h2 class="h-lg">오늘 챙길 것만, 시간순으로</h2><p class="body">아침 약, 저녁 영양제, 다음 주 병원 예약까지.<br>오늘 챙길 것을 시간순으로 보여주고, 체크하면 바로 기록으로 남아요.</p><ul class="feat__list"><li><span class="ms" aria-hidden="true">check</span>오늘 챙길 돌봄 한눈에</li><li><span class="ms" aria-hidden="true">check</span>병원·미용 일정 알림</li><li><span class="ms" aria-hidden="true">check</span>체크하면 자동으로 기록</li></ul></div><div class="feat__phone"><div class="phone" style="--s:0.66"><img src="assets/screens/home.png" width="804" height="1748" alt="오늘의 돌봄과 루틴을 보여주는 홈 디자인" loading="lazy" decoding="async"></div></div></div></section>
-<section class="feat"><div class="wrap feat__in reveal"><div class="feat__copy"><span class="eyebrow">기록</span><h2 class="h-lg">고양이 건강을, 감이 아닌 기록으로</h2><p class="body">식사·음수·화장실·체중부터 투약·증상·간식·병원 방문까지.<br>메모장, 사진첩, 카톡에 흩어지던 기록을 고양이별 타임라인에 모아요.</p><ul class="feat__list"><li><span class="ms" aria-hidden="true">check</span>8가지 기록 항목</li><li><span class="ms" aria-hidden="true">check</span>날짜별 타임라인</li><li><span class="ms" aria-hidden="true">check</span>병원 방문·비용 기록</li></ul></div><div class="feat__phone"><div class="phone" style="--s:0.66"><img src="assets/screens/record.png" width="804" height="1748" alt="고양이별 날짜별 기록 디자인" loading="lazy" decoding="async"></div></div></div></section>
-<section class="feat"><div class="wrap feat__in reveal"><div class="feat__copy"><span class="eyebrow">리포트</span><h2 class="h-lg">기록이 쌓이면,<br>변화가 보여요</h2><p class="body">물을 언제부터 더 마시기 시작했는지, 체중이 한 달 사이 얼마나 줄었는지. 식사·음수·화장실·체중의 흐름을 기간별 그래프로 보여드려요.</p><ul class="feat__list"><li><span class="ms" aria-hidden="true">check</span>4가지 핵심 수치 그래프</li><li><span class="ms" aria-hidden="true">check</span>주·월 단위 변화 비교</li><li><span class="ms" aria-hidden="true">check</span>병원에 보여줄 수 있는 요약</li></ul></div><div class="feat__phone"><div class="phone" style="--s:0.66"><img src="assets/screens/report.png" width="804" height="1748" alt="수치 변화와 돌봄을 보여주는 리포트 디자인" loading="lazy" decoding="async"></div></div></div></section>
-<section class="feat"><div class="wrap feat__in reveal"><div class="feat__copy"><span class="eyebrow">AI 분석</span><h2 class="h-lg">찾고 싶은 기록을,<br>질문으로</h2><p class="body">“얌전이 마지막으로 병원 언제 갔어?” “이번 달 물 평균 얼마나 마셨어?” 말로 물어보면, 쌓인 기록에서 바로 찾아 답해드려요.</p><ul class="feat__list"><li><span class="ms" aria-hidden="true">check</span>말로 묻는 기록 검색</li><li><span class="ms" aria-hidden="true">check</span>병원·투약 이력 바로 확인</li><li><span class="ms" aria-hidden="true">check</span>기간별 평균·횟수 계산</li></ul></div><div class="feat__phone"><div class="phone" style="--s:0.66"><img src="assets/screens/ai.png" width="804" height="1748" alt="자연어 조회를 위한 AI 화면 디자인 예시" loading="lazy" decoding="async"></div></div></div></section>
+<section class="feat"><div class="wrap feat__in reveal"><div class="feat__copy"><span class="eyebrow">오늘 할 일</span><h2 class="h-lg">오늘 챙길 것만<br>시간순으로</h2><p class="body">아침 약, 저녁 영양제, 다음 주 병원 예약까지.<br>오늘 챙길 것을 시간순으로 보여주고, 체크하면 바로 기록으로 남아요.</p><ul class="feat__list"><li><span class="ms" aria-hidden="true">check</span>오늘 챙길 돌봄 한눈에</li><li><span class="ms" aria-hidden="true">check</span>병원·미용 일정 알림</li><li><span class="ms" aria-hidden="true">check</span>체크하면 자동으로 기록</li></ul></div><div class="feat__phone"><div class="phone" style="--s:0.66"><img src="assets/screens/home.png" width="804" height="1748" alt="오늘의 돌봄과 루틴을 보여주는 홈 디자인" loading="lazy" decoding="async"></div></div></div></section>
+<section class="feat"><div class="wrap feat__in reveal"><div class="feat__copy"><span class="eyebrow">기록</span><h2 class="h-lg">고양이 건강,<br>감이 아닌 기록으로</h2><p class="body">식사·음수·화장실·체중부터 투약·증상·간식·병원 방문까지.<br>메모장, 사진첩, 카톡에 흩어지던 기록을 고양이별 타임라인에 모아요.</p><ul class="feat__list"><li><span class="ms" aria-hidden="true">check</span>8가지 기록 항목</li><li><span class="ms" aria-hidden="true">check</span>날짜별 타임라인</li><li><span class="ms" aria-hidden="true">check</span>병원 방문·비용 기록</li></ul></div><div class="feat__phone"><div class="phone" style="--s:0.66"><img src="assets/screens/record.png" width="804" height="1748" alt="고양이별 날짜별 기록 디자인" loading="lazy" decoding="async"></div></div></div></section>
+<section class="feat"><div class="wrap feat__in reveal"><div class="feat__copy"><span class="eyebrow">리포트</span><h2 class="h-lg">기록이 쌓이면<br>변화가 보여요</h2><p class="body">물을 언제부터 더 마시기 시작했는지, 체중이 한 달 사이 얼마나 줄었는지.<br>식사·음수·화장실·체중의 흐름을 기간별 그래프로 보여드려요.</p><ul class="feat__list"><li><span class="ms" aria-hidden="true">check</span>4가지 핵심 수치 그래프</li><li><span class="ms" aria-hidden="true">check</span>주·월 단위 변화 비교</li><li><span class="ms" aria-hidden="true">check</span>병원에 보여줄 수 있는 요약</li></ul></div><div class="feat__phone"><div class="phone" style="--s:0.66"><img src="assets/screens/report.png" width="804" height="1748" alt="수치 변화와 돌봄을 보여주는 리포트 디자인" loading="lazy" decoding="async"></div></div></div></section>
+<section class="feat"><div class="wrap feat__in reveal"><div class="feat__copy"><span class="eyebrow">AI 분석</span><h2 class="h-lg">찾고 싶은 기록을<br>질문으로</h2><p class="body">“얌전이 마지막으로 병원 언제 갔어?” “이번 달 물 평균 얼마나 마셨어?”<br>말로 물어보면, 쌓인 기록에서 바로 찾아 답해드려요.</p><ul class="feat__list"><li><span class="ms" aria-hidden="true">check</span>말로 묻는 기록 검색</li><li><span class="ms" aria-hidden="true">check</span>병원·투약 이력 바로 확인</li><li><span class="ms" aria-hidden="true">check</span>기간별 평균·횟수 계산</li></ul></div><div class="feat__phone"><div class="phone" style="--s:0.66"><img src="assets/screens/ai.png" width="804" height="1748" alt="자연어 조회를 위한 AI 화면 디자인 예시" loading="lazy" decoding="async"></div></div></div></section>
 </main>
-<section class="dev" id="devices"><span id="product" class="anchor-alias"></span><div class="wrap reveal"><span class="eyebrow">IoT 기기</span><h2 class="h-lg" style="margin-top:14px;max-width:640px">기기가 있다면<br>기록이 저절로 쌓여요.</h2><p class="body" style="margin-top:16px;max-width:600px">쓰던 밥그릇, 물그릇, 화장실 아래에 패드를 두면 식사량·음수량·체중·화장실 이용이 앱에 자동으로 기록돼요. 현재 시제품을 테스트하고 있습니다.</p>
+<section class="dev" id="devices"><span id="product" class="anchor-alias"></span><div class="wrap reveal"><span class="eyebrow">IoT 기기</span><h2 class="h-lg" style="margin-top:14px;max-width:640px">기기가 있다면<br>기록이 저절로 쌓여요</h2><p class="body" style="margin-top:16px">쓰던 가구 아래에 패드를 두면 식사량·음수량·체중·화장실 이용이 앱에 자동으로 기록돼요.</p>
 <div class="devp__grid">
 <div class="devp"><div class="devp__img"><img src="cat_2.jpeg" alt="BLE 목걸이를 착용한 고양이" loading="lazy"></div><div class="devp__b"><span class="devp__tag">collar</span><h3 class="h-md">개체식별 목걸이</h3><p class="body">여러 마리가 같은 그릇을 써도, 누가 먹었는지 구분해요.</p><div class="devp__m"><span><span class="ms" aria-hidden="true">contactless</span>고양이 자동 구분</span></div></div></div>
 <div class="devp"><div class="devp__img"><img src="small_pad.jpeg" alt="그릇 받침 아래에 둔 급식·급수 패드" loading="lazy"></div><div class="devp__b"><span class="devp__tag">food · water pad</span><h3 class="h-md">급식·급수 패드</h3><p class="body">그릇 아래에 두면, 얼마나 먹고 마셨는지 자동으로 기록돼요.</p><div class="devp__m"><span><span class="ms" aria-hidden="true">restaurant</span>식사량</span><span><span class="ms" aria-hidden="true">water_drop</span>음수량</span></div></div></div>
 <div class="devp"><div class="devp__img"><img src="large_pad.jpeg" alt="화장실 아래에 둔 대형 패드" loading="lazy"></div><div class="devp__b"><span class="devp__tag">litter pad</span><h3 class="h-md">화장실 패드</h3><p class="body">화장실에 들어갈 때마다 체중과 이용 횟수가 기록돼요.</p><div class="devp__m"><span><span class="ms" aria-hidden="true">monitor_weight</span>체중</span><span><span class="ms" aria-hidden="true">pets</span>배변 횟수</span></div></div></div>
 </div>
-<div style="margin-top:16px"><div class="note"><span class="ms" aria-hidden="true">health_and_safety</span><span>Catnalytics는 의료기기가 아닙니다. 질병을 진단하거나 치료하지 않으며, 기록과 패턴 변화를 보여드려 병원 방문 시점을 판단하는 데 도움을 드립니다.</span></div></div></div></section>
-<section class="cta" id="notify"><span id="contact" class="anchor-alias"></span><span id="about" class="anchor-alias"></span><div class="wrap cta__in"><img src="logo_white.svg" alt="" style="width:96px;height:96px;margin-bottom:4px"><h2 class="h-lg">더 건강한 일상을,<br>함께 만들어가요</h2><p class="body" style="max-width:560px">매일의 돌봄을 기록으로 남기고, 쌓인 데이터를 더 쉽게 이해하는 경험을 만들어갑니다.</p>
+</div></section>
+<section class="cta" id="notify"><span id="contact" class="anchor-alias"></span><span id="about" class="anchor-alias"></span><div class="wrap cta__in"><img src="logo_white.svg" alt="" style="width:96px;height:96px;margin-bottom:4px"><h2 class="h-lg">더 건강한 일상을<br>함께 만들어가요</h2><p class="body" style="max-width:560px">매일의 돌봄을 기록으로 남기고, 쌓인 데이터를 더 쉽게 이해하는 경험을 만들어갑니다.</p>
 <div class="wl"><p class="wl__t">Catnalytics의 다음 소식을 받아보세요</p><form class="wl__form" action="https://docs.google.com/forms/d/e/1FAIpQLScjauLfBpJLi6j8RXwefEXclJsMDQVJKDlVvKUzGqCDnJSGFQ/formResponse" method="POST" target="_blank" rel="noopener"><input type="email" name="entry.1466627912" autocomplete="email" required maxlength="254" placeholder="이메일 주소" aria-label="소식을 받을 이메일 주소"><button type="submit" class="btn btn--mint">알림 신청 ↗</button></form><p class="wl__hint">이메일은 개발·출시 소식과 테스트 모집 안내에만 사용됩니다.</p></div></div></section>
 <footer class="footer"><div class="wrap"><div class="footer__bottom"><span>© 2026 Catnalytics</span><span>문의 <a href="mailto:catnalytics@gmail.com">catnalytics@gmail.com</a></span></div></div></footer><script src="site.js" defer></script>
 </body>
